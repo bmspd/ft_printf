@@ -2,10 +2,11 @@
 
 static void	ft_zmin_width(char *work_str, va_list args, int *i, t_flags *fkit)
 {
-	if (work_str[*i] == '0' && fkit->width == 0 && fkit->f_minus == 0)
+	if (work_str[*i] == '0' && fkit->width == 0)
 	{
 		fkit->f_zero = 1;
-		(*i)++;
+		while (work_str[*i] == '0')
+			(*i)++;
 	}
 	if (work_str[*i] == '-')
 		*fkit = ft_flag_minus(*fkit);
@@ -25,8 +26,6 @@ int	ft_flag_parsing(char *work_str, va_list args, int i, t_flags *fkit)
 	i++;
 	while (work_str[i])
 	{
-		if (!(ft_validation(work_str[i])))
-			break ;
 		ft_zmin_width(work_str, args, &i, fkit);
 		if (work_str[i] == '*')
 			*fkit = ft_flag_argaccuracy(*fkit, args, &i);

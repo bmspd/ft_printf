@@ -71,7 +71,7 @@ void	ft_pointer_behaviour(t_flags fkit, va_list args, int *counter)
 
 	number = va_arg(args, unsigned long int);
 	len = number_len_hex(number);
-	if (!number)
+	if (!number && fkit.accuracy !=0)
 		len = 1;
 	*counter = *counter + len + 2;
 	diff = fkit.accuracy - len;
@@ -80,6 +80,7 @@ void	ft_pointer_behaviour(t_flags fkit, va_list args, int *counter)
 	else
 		space_diff = fkit.width - fkit.accuracy - len - 2;
 	minzer_printzero(fkit, space_diff, diff, counter);
-	printing_number(number);
+	if (number || ((!number) && fkit.accuracy != 0))
+		printing_number(number);
 	minone(fkit, space_diff, counter);
 }

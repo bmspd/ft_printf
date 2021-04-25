@@ -24,6 +24,11 @@ t_flags	ft_flag_width(t_flags fkit, char *work_str, int *i)
 t_flags	ft_flag_argwidth(t_flags fkit, va_list args, int *i)
 {
 	fkit.width = va_arg(args, int);
+	if (fkit.width < 0)
+	{
+		fkit.width = -fkit.width;
+		fkit.f_minus = 1;
+	}
 	(*i)++;
 	return (fkit);
 }
@@ -45,6 +50,10 @@ t_flags	ft_flag_accuracy(t_flags fkit, char *work_str, int *i)
 t_flags	ft_flag_argaccuracy(t_flags fkit, va_list args, int *i)
 {
 	fkit.accuracy = va_arg(args, int);
+	if (fkit.accuracy < 0)
+	{
+		fkit.accuracy = -1;
+	}
 	(*i)++;
 	return (fkit);
 }
