@@ -21,6 +21,7 @@ RM				= rm -f
 CFLAGS			= -Wall -Wextra -Werror
 INCLUDES		= -I./includes
 
+
 _GREEN=\e[32m
 _YELLOW=\e[33m
 _CYAN=\e[36m
@@ -28,12 +29,23 @@ _END=\e[0m
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS) ./includes/$(HEADER)
-				$(MAKE) bonus -C ./libft
+$(NAME):		$(OBJS) ./includes/$(HEADER) 
+				$(MAKE) -C ./libft
 				cp libft/libft.a ./$(NAME)		
 				ar -rcs $(NAME) $(OBJS)
 			
 				@printf "$(_GREEN)\t\t✓✓✓ SUCCESSFUL COMPILATION! ✓✓✓$(_GREEN)\n"
+
+clean:
+				$(MAKE) clean -C ./libft	
+				$(RM) $(OBJS)		
+
+fclean:			clean
+				$(MAKE) fclean -C ./libft
+				$(RM) $(NAME)
+				
+
+re:				fclean all
 
 test:			all
 				@printf "$(_GREEN)Compiling test file main.c\n"
@@ -41,17 +53,6 @@ test:			all
 				@printf "$(_CYAN) ══════════════════════════════$(_END) \n"
 				gcc main.c $(NAME) && ./a.out
 				@printf "\n$(_CYAN) ══════════════════════════════ $(_END) \n"
-clean:
-				$(MAKE) clean -C./libft	
-				$(RM) $(OBJS)		
-
-fclean:			clean
-				$(MAKE) fclean -C./libft
-				$(RM) $(NAME)
-				
-
-re:				fclean all
-
 
 smile:
 	@clear

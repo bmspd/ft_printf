@@ -22,11 +22,10 @@ CFLAGS			= -Wall -Wextra -Werror -I $(HEADER)
 NAME			= libft.a
 
 
-
 all:			$(NAME) 
 
-$(NAME):		$(OBJS) $(HEADER)
-				ar rcs $(NAME) $(OBJS)
+$(NAME):		$(OBJS) $(BONUS_OBJS) $(HEADER)
+				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 clean:
 				$(RM) $(OBJS) $(BONUS_OBJS)
@@ -35,8 +34,5 @@ fclean:			clean
 				$(RM) $(NAME)
 
 re:				fclean $(NAME)
-
-bonus:			$(OBJS) $(BONUS_OBJS)
-				ar rcs $(NAME) $(OBJS) $(BONUS_OBJS)
 
 .PHONY:			all clean fclean re bonus
