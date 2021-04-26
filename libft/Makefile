@@ -23,7 +23,7 @@ NAME			= libft.a
 
 
 
-all:			$(NAME)
+all:			$(NAME) 
 
 $(NAME):		$(OBJS) $(HEADER)
 				ar rcs $(NAME) $(OBJS)

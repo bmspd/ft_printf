@@ -2,6 +2,7 @@ LIBFT = ./libft/libft.a
 
 NAME 			= libftprintf.a
 
+HEADER			= ft_printf.h
 DIR_S			= src
 
 SOURCE			= ft_printf.c ft_putchar.c ft_tdef_init.c \
@@ -27,7 +28,7 @@ _END=\e[0m
 
 all:			$(NAME)
 
-$(NAME):		$(OBJS)
+$(NAME):		$(OBJS) ./includes/$(HEADER)
 				$(MAKE) bonus -C ./libft
 				cp libft/libft.a ./$(NAME)		
 				ar -rcs $(NAME) $(OBJS)
