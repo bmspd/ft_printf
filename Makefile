@@ -2,7 +2,7 @@ LIBFT = ./libft/libft.a
 
 NAME 			= libftprintf.a
 
-HEADER			= ft_printf.h
+HEADER			= ./includes/ft_printf.h
 DIR_S			= src
 
 SOURCE			= ft_printf.c ft_putchar.c ft_tdef_init.c \
@@ -15,27 +15,25 @@ SOURCE			= ft_printf.c ft_putchar.c ft_tdef_init.c \
 
 SRCS			= $(addprefix $(DIR_S)/,$(SOURCE))
 OBJS			= $(SRCS:.c=.o)
-
+%.o:		%.c ${HEADER}
+		$(CC) $(CFLAGS) -c -o $@ $<
 CC				= gcc
 RM				= rm -f
-CFLAGS			= -Wall -Wextra -Werror
-INCLUDES		= -I./includes
-
+CFLAGS			= -Wall -Wextra -Werror -I $(HEADER)
+INCLUDES		= ./includes/ft_printf.h
 
 _GREEN=\e[32m
 _YELLOW=\e[33m
 _CYAN=\e[36m
 _END=\e[0m
 
-all:			$(NAME)
 
-$(NAME):		$(OBJS) ./includes/$(HEADER) 
+$(NAME):		$(OBJS) $(HEADER)
 				$(MAKE) -C ./libft
-				cp libft/libft.a ./$(NAME)		
-				ar -rcs $(NAME) $(OBJS)
-			
+				cp libft/libft.a ./$(NAME)
+				ar rcs $(NAME) $(OBJS)
 				@printf "$(_GREEN)\t\t✓✓✓ SUCCESSFUL COMPILATION! ✓✓✓$(_GREEN)\n"
-
+all:			$(NAME)
 clean:
 				$(MAKE) clean -C ./libft	
 				$(RM) $(OBJS)		
@@ -81,4 +79,4 @@ smile:
 
 	
 
-.PHONY:			all clean fclean re smile
+.PHONY:			all clean fclean re smile test
